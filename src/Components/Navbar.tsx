@@ -2,18 +2,23 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
     return (
-        <div className="navbar bg-base-100 shadow-sm w-full">
-            <div className="w-full mx-auto flex justify-between items-center px-4">
-                {/* Logo */}
-                <div className="flex justify-items-center items-center">
-                    <img src="/public/assets/AI Check logo.png" alt="logo" width={50} />
-                    <a className="btn btn-ghost text-xl">Addiction AI</a>
+        <nav className="bg-white shadow-xl">
+            <div className="flex items-center justify-between w-full max-w-[1130px] py-[22px] mx-auto">
+                <div className="flex justify-center items-center">
+                    <Link to={'/'}>
+                        <img width={55} src="/public/assets/AI Check logo.png" alt="logo" />
+                    </Link>
+                    <div className="text-xl font-bold text-[#0CC0DF]">Addcition AI</div>
                 </div>
-                {/* Menu */}
-                <ul className="menu menu-horizontal px-1">
-                    <li><a>Login Admin</a></li>
-                </ul>
+                <a
+                    href="#"
+                    className="flex items-center gap-2 rounded-full border border-[#0CC0DF] 
+                    py-3 px-5 font-semibold transition-all duration-300 hover:bg-[#0CC0DF]"
+                >
+                    <p className=" text-[#0CC0DF] hover:text-white">Login Admin</p>
+                </a>
+
             </div>
-        </div>
+        </nav>
     );
 }
