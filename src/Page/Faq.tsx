@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import NavbarMain from "../Components/Navbar main";
+import NavbarMain from "../Components/NavbarMain";
 
 export default function FaqPage() {
     return (
