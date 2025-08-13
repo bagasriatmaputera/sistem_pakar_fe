@@ -3,7 +3,7 @@ export default function AccordionFaq() {
         <section className="faq w-full flex flex-col justify-center items-center my-20">
             <p className="text-4xl font-medium underline">Pertanyaan yang Sering Diajukan - FAQ</p>
             <div className="accordion my-8 md:px-20 lg:px-30 w-full">
-                <div className="collapse bg-base-100 border border-base-300">
+                <div className="collapse bg-base-100 py-7 px-3 border border-base-300">
                     <input type="radio" name="my-accordion-1" defaultChecked />
                     <div className="collapse-title font-semibold text-xl text-[#0CC0DF]">Apa Itu Addiction AI Check?</div>
                     <div className="collapse-content text-xl">
@@ -12,7 +12,7 @@ export default function AccordionFaq() {
                         keyakinan diagnosa secara cepat, akurat, dan berbasis data hasil penelitian serta pengujian lapangan.
                     </div>
                 </div>
-                <div className="collapse bg-base-100 border border-base-300">
+                <div className="collapse bg-base-100 py-7 px-3 border border-base-300">
                     <input type="radio" name="my-accordion-1" />
                     <div className="collapse-title font-semibold text-xl text-[#0CC0DF]">Siapa yang bisa mengakses Addiction AI Check?</div>
                     <div className="collapse-content text-xl">
@@ -20,7 +20,7 @@ export default function AccordionFaq() {
                         Aksesnya dapat dilakukan secara online, tanpa memerlukan perangkat khusus, sehingga mudah digunakan oleh berbagai kalangan.
                     </div>
                 </div>
-                <div className="collapse bg-base-100 border border-base-300">
+                <div className="collapse bg-base-100 py-7 px-3 border border-base-300">
                     <input type="radio" name="my-accordion-1" />
                     <div className="collapse-title font-semibold text-xl text-[#0CC0DF]">Apakah Hasil Dari Addiction AI Check dapat diandalkan?</div>
                     <div className="collapse-content text-xl">
