@@ -1,8 +1,30 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import AccordionFaq from "../Components/Accordion";
+import Typed from "typed.js";
+import { useEffect, useRef } from "react";
+import Footer from "../Components/Footer";
 
 export default function BrowsePage() {
+    const el = useRef(null);
+
+    // 3. Gunakan useEffect untuk menginisialisasi Typed.js
+    useEffect(() => {
+        const typed = new Typed(el.current, { // Gunakan ref.current sebagai target
+            strings: ['Sistem Pakar', 'Expert System'],
+            typeSpeed: 100, // Sedikit diperlambat agar lebih natural
+            backSpeed: 30,
+            loop: true,
+            smartBackspace: true,
+            backDelay: 3000
+        });
+
+        // 4. Penting: Hancurkan instance saat komponen dilepas (unmount)
+        //    untuk mencegah memory leak
+        return () => {
+            typed.destroy();
+        };
+    }, []);
     return (
         <>
             <Navbar />
@@ -56,7 +78,7 @@ export default function BrowsePage() {
                         className="absolute right-0 w-[calc(100%-((100%-1130px)/2)-305px)] h-[720px] rounded-bl-[40px] overflow-hidden"
                     >
                         <img
-                            src="/public/assets/caraousel/andy-kelly-0E_vhMVqL9g-unsplash.jpg"
+                            src="/public/assets/caraousel/hero4.jpg"
                             className="w-full h-full object-cover"
                             alt="AI Diagnosis Background"
                         />
@@ -67,11 +89,12 @@ export default function BrowsePage() {
                 <div className="flex flex-col pt-[150px] pb-10 px-[120px] gap-10 bg-[#0CC0DF]">
                     <div className="projek flex flex-col justify-center p-2 m-2 items-center">
                         <p className="text-xl font-sans text-white">PROJEK SKRIPSI</p>
-                        <p className="text-7xl font-bold border p-3 rounded-full text-white px-10">Sistem Pakar</p>
+                        <p className="sistem-pakar text-7xl font-bold border p-3 rounded-full text-white px-10"><span ref={el}></span></p>
                     </div>
                 </div>
             </header>
-            <AccordionFaq/>
+            <AccordionFaq />
+            <Footer/>
         </>
     );
 }

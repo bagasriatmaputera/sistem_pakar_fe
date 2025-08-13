@@ -87,7 +87,7 @@ export default function FormPage() {
                     <p className="my-5">Semua pertanyaan wajib dijawab untuk memastikan hasil diagnosa yang akurat berdasarkan metode Certainty Factor.</p>
 
                     {gejala.map((g) => (
-                        <div className="my-5 ml-3" key={g.id}>
+                        <div className="my-10 ml-3" key={g.id}>
                             <p className="font-sans">{g.id}. Apakah Anda {g.nama}?</p>
                             <div className="radio-answer w-full ml-3 mt-3">
                                 <ul className="flex gap-10 font-sans">
