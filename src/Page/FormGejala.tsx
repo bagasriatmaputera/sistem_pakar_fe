@@ -37,7 +37,7 @@ export default function FormPage() {
         }));
     };
     const handleChangePengguna = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setAnswers((prev) => ({
+        setPengguna((prev) => ({
             ...prev,
             [e.target.name]: e.target.value
         }));
@@ -92,11 +92,11 @@ export default function FormPage() {
             >
                 <div className="box-form w-2/3 text-lg text-[#464646]">
                     <p><span className="font-bold">Dalam 2 minggu terakhir, </span>seberapa sering kamu mengalami gejala atau perilaku yang berkaitan dengan penggunaan AI?</p>
-                    <p className="my-5">Semua pertanyaan wajib dijawab untuk memastikan hasil diagnosa yang akurat berdasarkan metode Certainty Factor.</p>
+                    <p className="my-5">Semua pernyataan wajib dijawab untuk memastikan hasil diagnosa yang akurat berdasarkan metode Certainty Factor.</p>
 
-                    {gejala.map((g) => (
+                    {gejala.map((g, index) => (
                         <div className="my-10 ml-3" key={g.id}>
-                            <p className="font-sans">{g.id}. Apakah Anda {g.nama}?</p>
+                            <p className="font-sans">{index + 1}. {g.nama}?</p>
                             <div className="radio-answer w-full ml-3 mt-3">
                                 <ul className="flex gap-10 font-sans">
                                     {[
@@ -127,11 +127,10 @@ export default function FormPage() {
                         </div>
                     ))}
                 </div>
-                <div onClick={handleSubmit} className="cursor-pointer font-semibold text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
+                <div onClick={() => (document.getElementById('my_modal_3') as HTMLDialogElement).showModal()} className="cursor-pointer font-semibold text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
                 {/* modal */}
                 <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
-                        <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             {/* Nama */}
@@ -162,8 +161,8 @@ export default function FormPage() {
                                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 >
                                     <option value="">Pilih jenis kelamin</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="laki-laki">Laki-laki</option>
+                                    <option value="perempuan">Perempuan</option>
                                 </select>
                             </div>
 
@@ -196,7 +195,8 @@ export default function FormPage() {
                                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 />
                             </div>
-                        </form>
+                            <div onClick={handleSubmit} className="cursor-pointer font-semibold text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
+    
                     </div>
                 </dialog>
             </form>
