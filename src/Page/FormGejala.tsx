@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarMain from "../Components/NavbarMain";
 import type { gejala } from "../Types/Type";
 import axios from "axios";
@@ -8,7 +8,7 @@ export default function FormPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [answers, setAnswers] = useState<{ [key: number]: number }>({});
-    
+
     const [pengguna, setPengguna] = useState({
         nama: '',
         jenis_kelamin: '',
@@ -36,6 +36,12 @@ export default function FormPage() {
             [gejalaId]: value
         }));
     };
+    const handleChangePengguna = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setAnswers((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -47,16 +53,18 @@ export default function FormPage() {
         }
 
         console.log("Jawaban terkirim:", answers);
+        console.log("Jawaban Pengguna:", pengguna);
 
-        axios.post("http://localhost/diagnosa_adiksi_app/public/api/diagnosa", { answers })
-            .then((res) => {
-                console.log("Hasil diagnosa:", res.data);
-                alert("Diagnosa berhasil dikirim!");
-            })
-            .catch((err) => {
-                console.error(err);
-                alert("Terjadi kesalahan saat mengirim data");
-            });
+
+        // axios.post("http://localhost/diagnosa_adiksi_app/public/api/diagnosa", { answers })
+        //     .then((res) => {
+        //         console.log("Hasil diagnosa:", res.data);
+        //         alert("Diagnosa berhasil dikirim!");
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //         alert("Terjadi kesalahan saat mengirim data");
+        //     });
     };
 
     if (loading) return <p>Loading ...</p>;
@@ -119,12 +127,78 @@ export default function FormPage() {
                         </div>
                     ))}
                 </div>
+                <div onClick={handleSubmit} className="cursor-pointer font-semibold text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
+                {/* modal */}
+                <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            {/* Nama */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Nama <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="nama"
+                                    value={pengguna.nama}
+                                    onChange={handleChangePengguna}
+                                    required
+                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                />
+                            </div>
 
-                <button
-                    type="submit"
-                    className="mt-6 bg-red text-white font-bold py-3 px-6 rounded-lg">
-                    Kirim Diagnosa
-                </button>
+                            {/* Jenis Kelamin */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Jenis Kelamin <span className="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="jenis_kelamin"
+                                    value={pengguna.jenis_kelamin}
+                                    onChange={handleChangePengguna}
+                                    required
+                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                >
+                                    <option value="">Pilih jenis kelamin</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+
+                            {/* Umur */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Umur <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    name="umur"
+                                    value={pengguna.umur}
+                                    onChange={handleChangePengguna}
+                                    required
+                                    min={1}
+                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                />
+                            </div>
+
+                            {/* Prodi */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Prodi (opsional)
+                                </label>
+                                <input
+                                    type="text"
+                                    name="prodi"
+                                    value={pengguna.prodi}
+                                    onChange={handleChangePengguna}
+                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </dialog>
             </form>
         </>
     );

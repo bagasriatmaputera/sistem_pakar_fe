@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavbarMain from "../Components/NavbarMain";
+import Footer from "../Components/Footer";
 
 export default function FaqPage() {
     return (
@@ -69,6 +70,7 @@ export default function FaqPage() {
                     </Link>
                 </div >
             </section >
+            <Footer/>
         </>
     );
 }
