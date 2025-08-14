@@ -56,7 +56,7 @@ export default function FormPage() {
         console.log("Jawaban Pengguna:", pengguna);
 
 
-        // axios.post("http://localhost/diagnosa_adiksi_app/public/api/diagnosa", { answers })
+        // axios.post("http://localhost/diagnosa_adiksi_app/public/api/form-gejala", { answers, pengguna })
         //     .then((res) => {
         //         console.log("Hasil diagnosa:", res.data);
         //         alert("Diagnosa berhasil dikirim!");
@@ -67,8 +67,16 @@ export default function FormPage() {
         //     });
     };
 
-    if (loading) return <p>Loading ...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) {
+        return <p className="text-center font-sans">
+            Loading ...
+            <span className="loading loading-spinner loading-md"></span>
+        </p>;
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
 
     return (
         <>
@@ -90,7 +98,7 @@ export default function FormPage() {
                 onSubmit={handleSubmit}
                 className="form-gejala flex flex-col justify-center my-10 items-center"
             >
-                <div className="box-form w-2/3 text-lg text-[#464646]">
+                <div className="box-form w-5/6 sm:w-4/5 text-lg text-[#464646]">
                     <p><span className="font-bold">Dalam 2 minggu terakhir, </span>seberapa sering kamu mengalami gejala atau perilaku yang berkaitan dengan penggunaan AI?</p>
                     <p className="my-5">Semua pernyataan wajib dijawab untuk memastikan hasil diagnosa yang akurat berdasarkan metode Certainty Factor.</p>
 
@@ -98,7 +106,7 @@ export default function FormPage() {
                         <div className="my-10 ml-3" key={g.id}>
                             <p className="font-sans">{index + 1}. {g.nama}?</p>
                             <div className="radio-answer w-full ml-3 mt-3">
-                                <ul className="flex gap-10 font-sans">
+                                <ul className="flex flex-wrap gap-4 sm:gap-10 font-sans">
                                     {[
                                         { label: "Tidak Yakin", value: 0 },
                                         { label: "Sedikit Yakin", value: 0.25 },
@@ -131,72 +139,78 @@ export default function FormPage() {
                 {/* modal */}
                 <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                            {/* Nama */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Nama <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="nama"
-                                    value={pengguna.nama}
-                                    onChange={handleChangePengguna}
-                                    required
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                />
-                            </div>
+                        <div>
+                            <button
+                                type="button"
+                                onClick={() => (document.getElementById('my_modal_3') as HTMLDialogElement).close()}
+                                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        {/* Nama */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Nama <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="nama"
+                                value={pengguna.nama}
+                                onChange={handleChangePengguna}
+                                required
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+                        </div>
 
-                            {/* Jenis Kelamin */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Jenis Kelamin <span className="text-red-500">*</span>
-                                </label>
-                                <select
-                                    name="jenis_kelamin"
-                                    value={pengguna.jenis_kelamin}
-                                    onChange={handleChangePengguna}
-                                    required
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                >
-                                    <option value="">Pilih jenis kelamin</option>
-                                    <option value="laki-laki">Laki-laki</option>
-                                    <option value="perempuan">Perempuan</option>
-                                </select>
-                            </div>
+                        {/* Jenis Kelamin */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Jenis Kelamin <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                                name="jenis_kelamin"
+                                value={pengguna.jenis_kelamin}
+                                onChange={handleChangePengguna}
+                                required
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            >
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="laki-laki">Laki-laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
+                        </div>
 
-                            {/* Umur */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Umur <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="number"
-                                    name="umur"
-                                    value={pengguna.umur}
-                                    onChange={handleChangePengguna}
-                                    required
-                                    min={1}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                />
-                            </div>
+                        {/* Umur */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Umur <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="number"
+                                name="umur"
+                                value={pengguna.umur}
+                                onChange={handleChangePengguna}
+                                required
+                                min={1}
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+                        </div>
 
-                            {/* Prodi */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Prodi (opsional)
-                                </label>
-                                <input
-                                    type="text"
-                                    name="prodi"
-                                    value={pengguna.prodi}
-                                    onChange={handleChangePengguna}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                />
-                            </div>
-                            <div onClick={handleSubmit} className="cursor-pointer font-semibold text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
-    
+                        {/* Prodi */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Prodi (opsional)
+                            </label>
+                            <input
+                                type="text"
+                                name="prodi"
+                                value={pengguna.prodi}
+                                onChange={handleChangePengguna}
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+                        </div>
+                        <div onClick={handleSubmit} className="mt-5 cursor-pointer font-semibold text-center text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
                     </div>
                 </dialog>
             </form>
