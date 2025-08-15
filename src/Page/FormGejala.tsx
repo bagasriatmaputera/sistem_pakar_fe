@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import NavbarMain from "../Components/NavbarMain";
-import type { gejala } from "../Types/Type";
+import type { Aturan } from "../Types/Type";
 import axios from "axios";
 
 export default function FormPage() {
-    const [gejala, setGejala] = useState<gejala[]>([]);
+    const [gejala, setGejala] = useState<Aturan[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [answers, setAnswers] = useState<{ [key: number]: number }>({});
+    const [answers, setAnswers] = useState<{ gejala_id: number; value: number }[]>([]);
+
 
     const [pengguna, setPengguna] = useState({
         nama: '',
@@ -17,7 +18,7 @@ export default function FormPage() {
     });
 
     useEffect(() => {
-        axios.get('http://localhost/diagnosa_adiksi_app/public/api/gejala')
+        axios.get('http://localhost/diagnosa_adiksi_app/public/api/aturan')
             .then((res) => {
                 setLoading(false);
                 setGejala(res.data.data);
@@ -31,11 +32,20 @@ export default function FormPage() {
     }, []);
 
     const handleChange = (gejalaId: number, value: number) => {
-        setAnswers((prev) => ({
-            ...prev,
-            [gejalaId]: value
-        }));
+        setAnswers((prev) => {
+            const exists = prev.find((a) => a.gejala_id === gejalaId);
+            if (exists) {
+                // Update jika sudah ada
+                return prev.map((a) =>
+                    a.gejala_id === gejalaId ? { ...a, value } : a
+                );
+            } else {
+                // Tambah baru
+                return [...prev, { gejala_id: gejalaId, value }];
+            }
+        });
     };
+
     const handleChangePengguna = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setPengguna((prev) => ({
             ...prev,
@@ -104,7 +114,8 @@ export default function FormPage() {
 
                     {gejala.map((g, index) => (
                         <div className="my-10 ml-3" key={g.id}>
-                            <p className="font-sans">{index + 1}. {g.nama}?</p>
+                            <p className="font-sans">{index + 1}. {g.gejala?.nama}?</p>
+                            <p className="font-sans"><span className="font-semibold lg:ml-7">Kategori Adiksi:</span> {g.adiksi?.nama}</p>
                             <div className="radio-answer w-full ml-3 mt-3">
                                 <ul className="flex flex-wrap gap-4 sm:gap-10 font-sans">
                                     {[
@@ -121,7 +132,7 @@ export default function FormPage() {
                                                     name={`gejala-${g.id}`}
                                                     value={opt.value}
                                                     onChange={() => handleChange(g.id, opt.value)}
-                                                    checked={answers[g.id] === opt.value}
+                                                    checked={answers.find((a) => a.gejala_id === g.id)?.value === opt.value}
                                                     className="hidden peer"
                                                 />
                                                 <span className="py-2 px-3 border rounded-full px-5 bg-[#E3F8F8] peer-checked:bg-[#0CC0DF] peer-checked:text-white">
