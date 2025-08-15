@@ -29,11 +29,11 @@ export default function BrowsePage() {
         <>
             <Navbar />
             <header className="flex flex-col w-full">
-                <section id="Hero-Banner" className="relative flex h-[720px] -mb-[93px]">
+                <section id="Hero-Banner" className="p-7 flex h-[720px] -mb-[93px]">
                     {/* Hero Text */}
                     <div
                         id="Hero-Text"
-                        className="relative shadow-xl flex flex-col w-full max-w-[650px] h-fit rounded-[30px] border border-[#E0DEF7] p-10 gap-[30px] bg-white mt-[70px] ml-[calc((100%-1130px)/2)] z-10"
+                        className="xl:relative shadow-xl flex flex-col w-full max-w-[650px] justify-center sm:justify-startgit h-fit rounded-[30px] border border-[#E0DEF7] p-10 gap-[30px] bg-[#E3F8F8] mt-[70px] z-10"
                     >
                         <div className="flex items-center w-fit rounded-full py-2 px-4 gap-[10px] bg-[#000929]">
                             <span className="font-semibold text-white">
@@ -41,31 +41,31 @@ export default function BrowsePage() {
                             </span>
                         </div>
 
-                        <h1 className="font-extrabold text-[50px] text-black-500 leading-[60px]">
+                        <div className="font-extrabold  text-3xl sm:text-[50px] text-black-500 sm:leading-[60px]">
                             Diagnosa Cepat,
                             <br />
                             Adiksi Pada AI.
-                        </h1>
+                        </div>
 
-                        <p className="text-lg leading-8 text-[#000929]">
+                        <p className="sm:text-lg leading-8 text-[#000929]">
                             Menggunakan metode Certainty Factor untuk memberikan hasil diagnosa yang akurat dalam hitungan detik, berdasarkan penelitian dan pengujian lapangan.
                         </p>
 
-                        <div className="flex items-center gap-5">
+                        <div className="flex flex-wrap justify-center sm:justify-between items-center gap-5">
                             <Link to={'/faq'}>
                                 <div
                                     className="flex items-center rounded-full p-[20px_26px] gap-3 bg-[#0CC0DF]"
                                 >
-                                    <span className="font-bold text-xl leading-[30px] text-[#F7F7FD]">
+                                    <span className="font-bold text-center text-xl leading-[30px] text-[#F7F7FD]">
                                         Mulai Diagnosa
                                     </span>
                                 </div>
                             </Link>
                             <a
                                 href="https://kantinit.com/kecerdasan-buatan/certainty-factor-cf-defenisi-fungsi-rumus-dan-penerapannya/"
-                                className="flex items-center rounded-full border border-[#000929] p-[20px_26px] gap-3 bg-white"
+                                className="flex items-center rounded-full border border-[#000929] p-[20px_26px] gap-3 bg-base-200"
                             >
-                                <span className="font-semibold text-xl leading-[30px]">
+                                <span className="font-semibold text-center text-xl leading-[30px]">
                                     Pelajari Metode
                                 </span>
                             </a>
