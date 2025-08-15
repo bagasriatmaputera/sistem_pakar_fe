@@ -29,7 +29,7 @@ export default function NavbarMain() {
                 {/* hiiden for mobile */}
                 <details className="dropdown dropdown-end sm:hidden">
                     <summary className="btn m-1 rounded-full"></summary>
-                    <ul className="dropdown-content bg-[#0CC0DF] rounded-box z-1 w-52 p-2 shadow-sm">
+                    <ul className="dropdown-content bg-[#E3F8F8] rounded-box z-1 w-52 p-2 shadow-sm">
                         <li className="p-2 mx-3 ">
                             <Link to="/" ><p
                                 className="font-sans hover:font-bold hover:underline hover:text-white transition-all duration-300">Home</p></Link>
