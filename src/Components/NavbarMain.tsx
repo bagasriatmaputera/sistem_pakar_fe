@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NavbarMain() {
     return (
         <nav className="bg-white shadow-xl">
-            <div className="flex items-center justify-between w-full max-w-[1130px] py-[22px] mx-auto">
+            <div className="flex items-center justify-between w-full py-[22px] mx-auto">
                 <div className="flex justify-center items-center">
                     <Link to={'/'}>
                         <img width={55} src="/public/assets/AI Check logo.png" alt="logo" />
@@ -52,7 +52,7 @@ export default function NavbarMain() {
                     </ul>
                 </details>
                 <a
-                    href="#"
+                    href="http://127.0.0.1:8000/admin"
                     className="hidden sm:flex items-center gap-2 rounded-full border border-[#0CC0DF] 
                     py-2 px-4 m-3 font-semibold transition-all duration-300 hover:bg-[#0CC0DF]"
                 >
