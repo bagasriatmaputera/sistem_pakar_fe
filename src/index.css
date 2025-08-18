@@ -180,7 +180,9 @@ sup {
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
 3. Remove gaps between table borders by default.
 */
-
+Swal {
+   z-index: 9999 !important;
+}
 table {
   text-indent: 0;
   /* 1 */

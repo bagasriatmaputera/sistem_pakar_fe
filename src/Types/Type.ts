@@ -12,6 +12,18 @@ export interface Answer {
     cf_user: number;
     cf_pakar: number;
 }
+export interface Hasil {
+    id_hasil: number;
+    pengguna: Pengguna[]
+    adiksi: Adiksi;
+    cf_final: number;
+    tanggal: number;
+}
+
+interface Pengguna {
+    id: number,
+    nama: string,
+}
 
 interface Gejala {
     id: number;
