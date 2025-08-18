@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import NavbarMain from "../Components/NavbarMain";
-import type { Aturan } from "../Types/Type";
+import type { Answer, Aturan } from "../Types/Type";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function FormPage() {
     const [gejala, setGejala] = useState<Aturan[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [answers, setAnswers] = useState<{ gejala_id: number; value: number }[]>([]);
+    const [answers, setAnswers] = useState<Answer[]>([]);
+    const navigate = useNavigate();
 
 
     const [pengguna, setPengguna] = useState({
@@ -31,17 +35,17 @@ export default function FormPage() {
             });
     }, []);
 
-    const handleChange = (gejalaId: number, value: number) => {
+    const handleChange = (gejalaId: number, adiksi_id: number, cf_user: number, cf_pakar: number, cf_kombinasi: number) => {
         setAnswers((prev) => {
             const exists = prev.find((a) => a.gejala_id === gejalaId);
             if (exists) {
                 // Update jika sudah ada
                 return prev.map((a) =>
-                    a.gejala_id === gejalaId ? { ...a, value } : a
+                    a.gejala_id === gejalaId ? { ...a, adiksi_id, cf_user, cf_pakar, cf_kombinasi } : a
                 );
             } else {
                 // Tambah baru
-                return [...prev, { gejala_id: gejalaId, value }];
+                return [...prev, { gejala_id: gejalaId, adiksi_id, cf_user, cf_pakar, cf_kombinasi }];
             }
         });
     };
@@ -53,33 +57,82 @@ export default function FormPage() {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Pastikan semua pertanyaan sudah dijawab
         if (Object.keys(answers).length !== gejala.length) {
-            alert("Harap jawab semua pertanyaan!");
+            Swal.fire({
+                title:"Harap jawab semua pertanyaan!",
+                icon: 'warning'
+            });
             return;
         }
 
-        console.log("Jawaban terkirim:", answers);
-        console.log("Jawaban Pengguna:", pengguna);
+        // console.log("Jawaban terkirim:", answers);
+        // console.log("Jawaban Pengguna:", pengguna);
 
+        try {
+            setIsLoading(true);
+            const res = await axios.post("http://localhost/diagnosa_adiksi_app/public/api/form-gejala", {
+                answers,
+                pengguna
+            });
 
-        // axios.post("http://localhost/diagnosa_adiksi_app/public/api/form-gejala", { answers, pengguna })
-        //     .then((res) => {
-        //         console.log("Hasil diagnosa:", res.data);
-        //         alert("Diagnosa berhasil dikirim!");
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //         alert("Terjadi kesalahan saat mengirim data");
-        //     });
+            Swal.fire({
+                title:"Diagnosa berhasil dikirim!",
+                icon: 'success'
+            });
+            const penggunaId = res.data.pengguna.id;
+            const nama = res.data.pengguna.nama;
+
+            navigate(`/result/${penggunaId}`,{
+                state:{
+                    nama
+                }
+            });
+        } catch (err: any) {
+            if (err.response) {
+                // Server memberi respon error (status code 4xx / 5xx)
+                console.error("Error response:", err.response.data);
+                console.error("Status:", err.response.status);
+                console.error("Headers:", err.response.headers);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Error ${err.response.status}: ${err.response.data?.message || "Terjadi kesalahan dari server"}`,
+                });
+            } else if (err.request) {
+                // Request terkirim tapi tidak ada respon
+                console.error("Error request:", err.request);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Tidak ada respon dari server. Cek koneksi API`,
+                });
+            } else {
+                // Error lain (misal salah config)
+                console.error("Error message:", err.message);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Kesalahan: " + ${err.message}`,
+                });
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
+
 
     if (loading) {
         return <p className="text-center font-sans">
             Loading ...
+            <span className="loading loading-spinner loading-md"></span>
+        </p>;
+    }
+    if (isLoading) {
+        return <p className="">
             <span className="loading loading-spinner loading-md"></span>
         </p>;
     }
@@ -124,15 +177,21 @@ export default function FormPage() {
                                         { label: "Cukup Yakin", value: 0.5 },
                                         { label: "Yakin", value: 0.75 },
                                         { label: "Sangat Yakin", value: 1 }
-                                    ].map((opt, idx) => (
+                                    ].map((opt, idx,) => (
                                         <li key={idx}>
                                             <label className="flex items-center gap-2 cursor-pointer">
                                                 <input
                                                     type="radio"
                                                     name={`gejala-${g.id}`}
                                                     value={opt.value}
-                                                    onChange={() => handleChange(g.id, opt.value)}
-                                                    checked={answers.find((a) => a.gejala_id === g.id)?.value === opt.value}
+                                                    onChange={() => handleChange(
+                                                        g.id,
+                                                        g.adiksi.id,
+                                                        opt.value,             // cf_user
+                                                        g.cf_pakar,            // cf_pakar dari backend
+                                                        opt.value * g.cf_pakar // cf_kombinasi (contoh perkalian)
+                                                    )}
+                                                    checked={answers.find((a) => a.gejala_id === g.id)?.cf_user === opt.value}
                                                     className="hidden peer"
                                                 />
                                                 <span className="py-2 px-3 border rounded-full px-5 bg-[#E3F8F8] peer-checked:bg-[#0CC0DF] peer-checked:text-white">
@@ -221,7 +280,7 @@ export default function FormPage() {
                                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                             />
                         </div>
-                        <div onClick={handleSubmit} className="mt-5 cursor-pointer font-semibold text-center text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa</div>
+                        <div onClick={handleSubmit} className="mt-5 cursor-pointer font-semibold text-center text-[#464646] hover:text-white font-sans rounded-full border bg-[#E3F8F8] hover:bg-[#0CC0DF] py-2 px-4">Kirim Diagnosa{isLoading}</div>
                     </div>
                 </dialog>
             </form>
