@@ -4,6 +4,7 @@ import BrowsePage from './Page/Browse'
 import FaqPage from './Page/Faq'
 import FormPage from './Page/FormGejala'
 import ResultsPage from './Page/ResultsPage'
+import GejalaAdiksiPage from './Page/GejalaAdiksi'
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<BrowsePage />}></Route>
           <Route path='/faq' element={<FaqPage />}></Route>
+          <Route path='/pengertian' element={<GejalaAdiksiPage />}></Route>
           <Route path='/form-gejala' element={<FormPage />}></Route>
           <Route path='/result/:id' element={<ResultsPage />}></Route>
         </Routes>
