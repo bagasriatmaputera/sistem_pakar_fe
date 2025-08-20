@@ -13,7 +13,7 @@ export default function FaqPage() {
                     <li className="step">Hasil<br />Diagnosa</li>
                 </ul>
             </section>
-            <section className="faq w-full flex flex-col justify-center items-center my-20">
+            <section className="faq w-full flex flex-col justify-center items-center p-2 my-20">
                 <div className="bg-base-200 rounded-sm mx-10 sm:mx-20 py-2 sm:w-2/3">
                     <p
                         className="text-xl sm:text-5xl text-center text-[#0CC0DF] font-mono font-bold font-medium">
