@@ -11,7 +11,7 @@ export default function Navbar() {
                     <div className="text-md md:text-xl  font-bold text-[#0CC0DF]">Addcition AI</div>
                 </div>
                 <a
-                    href="http://127.0.0.1:8000/admin"
+                    href="https://adiksiai.online"
                     className="flex items-center gap-2 rounded-full border border-[#0CC0DF] 
                     py-3 px-5 font-semibold transition-all duration-300 hover:bg-[#0CC0DF]"
                 >

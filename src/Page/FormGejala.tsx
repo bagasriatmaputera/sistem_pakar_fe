@@ -22,7 +22,7 @@ export default function FormPage() {
     });
 
     useEffect(() => {
-        axios.get('http://localhost/diagnosa_adiksi_app/public/api/aturan')
+        axios.get('https://adiksiai.online/api/aturan')
             .then((res) => {
                 setLoading(false);
                 setGejala(res.data.data);
@@ -74,7 +74,7 @@ export default function FormPage() {
 
         try {
             setIsLoading(true);
-            const res = await axios.post("http://localhost/diagnosa_adiksi_app/public/api/form-gejala", {
+            const res = await axios.post("https://adiksiai.online/api/form-gejala", {
                 answers,
                 pengguna
             });
