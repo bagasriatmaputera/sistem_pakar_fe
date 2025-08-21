@@ -71,7 +71,7 @@ export default function ResultsPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost/diagnosa_adiksi_app/public/api/hasil/${id}`);
+                const res = await axios.get(`https://adiksiai.online/api/hasil/${id}`);
                 setLoading(false);
                 setHasil(res.data.data);
             } catch (error: any) {
