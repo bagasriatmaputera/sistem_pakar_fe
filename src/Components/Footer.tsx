@@ -3,7 +3,7 @@ export default function Footer() {
         <>
             <footer className="footer sm:footer-horizontal bg-[#0CC0DF] text-neutral-content mt-30 p-10">
                 <aside>
-                    <img src="/public/assets/Brp logo.png" className="max-w-14 max-h-14 rounded-full" alt="Logo-brp.png" />
+                    <img src="/assets/Brp logo.png" className="max-w-14 max-h-14 rounded-full" alt="Logo-brp.png" />
                     <p className="font-bold font-sans">
                         BRP
                     </p>

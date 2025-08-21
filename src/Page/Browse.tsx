@@ -78,7 +78,7 @@ export default function BrowsePage() {
                         className="absolute right-0 w-[calc(100%-((100%-1130px)/2)-305px)] h-[720px] rounded-bl-[40px] overflow-hidden"
                     >
                         <img
-                            src="/public/assets/caraousel/hero4.jpg"
+                            src="/assets/caraousel/hero4.jpg"
                             className="w-full h-full object-cover"
                             alt="AI Diagnosis Background"
                         />

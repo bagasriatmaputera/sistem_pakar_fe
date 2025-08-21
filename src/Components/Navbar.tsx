@@ -6,7 +6,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between w-full py-[22px] mx-auto">
                 <div className="flex justify-center items-center">
                     <Link to={'/'}>
-                        <img width={55} src="/public/assets/AI Check logo.png" alt="logo" />
+                        <img width={55} src="/assets/AI Check logo.png" alt="logo" />
                     </Link>
                     <div className="text-md md:text-xl  font-bold text-[#0CC0DF]">Addcition AI</div>
                 </div>
