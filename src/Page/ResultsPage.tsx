@@ -5,6 +5,7 @@ import type { Hasil } from "../Types/Type";
 import axios from "axios";
 import Footer from "../Components/Footer";
 import jsPDF from "jspdf";
+import Swal from "sweetalert2";
 
 export default function ResultsPage() {
     const { id } = useParams<{ id: string }>();
@@ -63,7 +64,10 @@ export default function ResultsPage() {
                 doc.text(solusi, 15, y);
                 y += solusi.length * 6;
             });
-
+        Swal.fire({
+            title: "Terima kasih telah menggunakan aplikasi diagnosa iniSemoga hasilnya bermanfaat untuk Anda",
+            icon: 'success'
+        });
         doc.save(`Addiction AI -${pengguna.nama} .pdf`);
     };
 
@@ -186,4 +190,5 @@ export default function ResultsPage() {
             <Footer />
         </div>
     );
+
 }
