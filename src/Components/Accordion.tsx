@@ -1,8 +1,8 @@
 export default function AccordionFaq() {
     return (
         <section className="faq w-full flex flex-col justify-center items-center my-20">
-            <p className="text-4xl font-medium underline">Pertanyaan yang Sering Diajukan - FAQ</p>
-            <div className="accordion my-8 md:px-20 lg:px-30 w-full">
+            <p className="text-4xl text-center font-medium underline">Pertanyaan yang Sering Diajukan - FAQ</p>
+            <div className="accordion px-5 my-8 md:px-20 lg:px-30 w-full">
                 <div className="collapse bg-base-100 py-7 px-3 border border-base-300">
                     <input type="radio" name="my-accordion-1" defaultChecked />
                     <div className="collapse-title font-semibold text-xl text-[#0CC0DF]">Apa Itu Addiction AI Check?</div>

@@ -26,7 +26,7 @@ export default function FormPage() {
             .then((res) => {
                 setLoading(false);
                 setGejala(res.data.data);
-                console.log('Data gejala:', res.data.data);
+                // console.log('Data gejala:', res.data.data);
             })
             .catch((err) => {
                 setError(err.message || "Terjadi kesalahan");

@@ -36,18 +36,18 @@ export default function BrowsePage() {
                         className="xl:relative shadow-xl flex flex-col w-full max-w-[650px] justify-center sm:justify-startgit h-fit rounded-[30px] border border-[#E0DEF7] p-10 gap-[30px] bg-[#E3F8F8] mt-[70px] z-10"
                     >
                         <div className="flex items-center w-fit rounded-full py-2 px-4 gap-[10px] bg-[#000929]">
-                            <span className="font-semibold text-white">
+                            <span className="font-semibold text-white text-center">
                                 Sistem Diagnosa Adiksi AI Teruji
                             </span>
                         </div>
 
-                        <div className="font-extrabold  text-3xl sm:text-[50px] text-black-500 sm:leading-[60px]">
+                        <div className="font-extrabold text-center  text-3xl sm:text-[50px] text-black-500 sm:leading-[60px]">
                             Diagnosa Cepat,
                             <br />
                             Adiksi Pada AI.
                         </div>
 
-                        <p className="sm:text-lg leading-8 text-[#000929]">
+                        <p className="sm:text-lg leading-8 text-center text-[#000929]">
                             Menggunakan metode Certainty Factor untuk memberikan hasil diagnosa yang akurat dalam hitungan detik, berdasarkan penelitian dan pengujian lapangan.
                         </p>
 
@@ -88,7 +88,7 @@ export default function BrowsePage() {
                 {/* Statistik */}
                 <div className="flex flex-col pt-[150px] pb-10 px-[120px] gap-10 bg-[#0CC0DF]">
                     <div className="projek flex flex-col justify-center p-2 m-2 items-center">
-                        <p className="text-xl font-sans text-white">PROJEK SKRIPSI</p>
+                        <p className="text-xl text-center font-semibold font-sans text-white">PROJEK SKRIPSI</p>
                         <p className="sistem-pakar text-7xl font-bold border p-3 rounded-full text-white px-10"><span ref={el}></span></p>
                     </div>
                 </div>
