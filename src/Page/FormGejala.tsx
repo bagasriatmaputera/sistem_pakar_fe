@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import NavbarMain from "../Components/NavbarMain";
 import type { Answer, Aturan } from "../Types/Type";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import apiClient from "../services/apiServices";
 
 export default function FormPage() {
     const [gejala, setGejala] = useState<Aturan[]>([]);
@@ -22,7 +22,7 @@ export default function FormPage() {
     });
 
     useEffect(() => {
-        axios.get('https://adiksiai.online/api/aturan')
+        apiClient.get('/aturan')
             .then((res) => {
                 setLoading(false);
                 setGejala(res.data.data);
@@ -63,7 +63,7 @@ export default function FormPage() {
         // Pastikan semua pertanyaan sudah dijawab
         if (Object.keys(answers).length !== gejala.length) {
             Swal.fire({
-                title:"Harap jawab semua pertanyaan!",
+                title: "Harap jawab semua pertanyaan!",
                 icon: 'warning'
             });
             return;
@@ -74,20 +74,20 @@ export default function FormPage() {
 
         try {
             setIsLoading(true);
-            const res = await axios.post("https://adiksiai.online/api/form-gejala", {
+            const res = await apiClient.post("/form-gejala", {
                 answers,
                 pengguna
             });
 
             Swal.fire({
-                title:"Diagnosa berhasil dikirim!",
+                title: "Diagnosa berhasil dikirim!",
                 icon: 'success'
             });
             const penggunaId = res.data.pengguna.id;
             const nama = res.data.pengguna.nama;
 
-            navigate(`/result/${penggunaId}`,{
-                state:{
+            navigate(`/result/${penggunaId}`, {
+                state: {
                     nama
                 }
             });
