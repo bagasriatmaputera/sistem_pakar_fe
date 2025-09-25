@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import NavbarMain from "../Components/NavbarMain";
 import Footer from "../Components/Footer";
+import TopBanner from "../Components/ADS";
 
 export default function FaqPage() {
     return (
         <>
+            <TopBanner />
             <NavbarMain />
             <section className="steps my-10 flex flex-col justify-center items-center">
                 <ul className="steps gap-3">
@@ -70,7 +72,7 @@ export default function FaqPage() {
                     </Link>
                 </div >
             </section >
-            <Footer/>
+            <Footer />
         </>
     );
 }

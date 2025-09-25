@@ -4,6 +4,7 @@ import type { Answer, Aturan } from "../Types/Type";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import apiClient from "../services/apiServices";
+import TopBanner from "../Components/ADS";
 
 export default function FormPage() {
     const [gejala, setGejala] = useState<Aturan[]>([]);
@@ -143,6 +144,7 @@ export default function FormPage() {
 
     return (
         <>
+            <TopBanner />
             <NavbarMain />
             <div className="heading-text my-5 flex justify-center">
                 <div className="text-center font-bold text-[#0CC0DF] text-5xl font-sans">

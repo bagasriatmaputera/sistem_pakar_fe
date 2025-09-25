@@ -4,6 +4,7 @@ import AccordionFaq from "../Components/Accordion";
 import Typed from "typed.js";
 import { useEffect, useRef } from "react";
 import Footer from "../Components/Footer";
+import TopBanner from "../Components/ADS";
 
 export default function BrowsePage() {
     const el = useRef(null);
@@ -27,6 +28,7 @@ export default function BrowsePage() {
     }, []);
     return (
         <>
+            <TopBanner />
             <Navbar />
             <header className="flex flex-col w-full">
                 <section id="Hero-Banner" className="p-7 flex h-[720px] -mb-[93px]">
@@ -94,7 +96,7 @@ export default function BrowsePage() {
                 </div>
             </header>
             <AccordionFaq />
-            <Footer/>
+            <Footer />
         </>
     );
 }

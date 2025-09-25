@@ -1,9 +1,11 @@
+import TopBanner from "../Components/ADS";
 import Footer from "../Components/Footer";
 import NavbarMain from "../Components/NavbarMain";
 
 export default function GejalaAdiksiPage() {
     return (
         <>
+            <TopBanner />
             <NavbarMain />
             <div className="heading-text my-5 flex justify-center">
                 <div className="text-center font-bold text-[#0CC0DF] text-5xl font-sans">
@@ -41,7 +43,7 @@ export default function GejalaAdiksiPage() {
                     </div>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </>
     );
 }
