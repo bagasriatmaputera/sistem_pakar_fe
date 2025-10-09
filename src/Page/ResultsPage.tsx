@@ -6,7 +6,6 @@ import axios from "axios";
 import Footer from "../Components/Footer";
 import jsPDF from "jspdf";
 import Swal from "sweetalert2";
-import TopBanner from "../Components/ADS";
 
 export default function ResultsPage() {
     const { id } = useParams<{ id: string }>();
@@ -105,7 +104,6 @@ export default function ResultsPage() {
     }
     return (
         <div className="w-full">
-            <TopBanner />
             <NavbarMain />
             <div className="heading-text my-5 flex justify-center">
                 <div className="text-center font-bold text-[#0CC0DF] text-5xl font-sans">
